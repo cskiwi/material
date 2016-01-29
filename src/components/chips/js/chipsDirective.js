@@ -174,6 +174,7 @@
       scope: {
         readonly: '=readonly',
         placeholder: '@',
+        keepTemplateInAttr: '@',
         secondaryPlaceholder: '@',
         transformChip: '&mdTransformChip',
         onAppend: '&mdOnAppend',
@@ -218,7 +219,9 @@
     function compile(element, attr) {
       // Grab the user template from attr and reset the attribute to null.
       var userTemplate = attr['$mdUserTemplate'];
-      attr['$mdUserTemplate'] = null;
+      if (!attr.keepTemplateInAttr) {
+        attr['$mdUserTemplate'] = null;
+      }
 
       // Set the chip remove, chip contents and chip input templates. The link function will put
       // them on the scope for transclusion later.
